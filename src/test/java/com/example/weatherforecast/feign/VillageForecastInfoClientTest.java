@@ -1,18 +1,16 @@
 package com.example.weatherforecast.feign;
 
+import com.example.weatherforecast.TestSetup;
 import com.example.weatherforecast.dto.ApiResponse;
 import com.example.weatherforecast.dto.UltraShortForecastDto;
 import com.example.weatherforecast.dto.UltraShortNowcastDto;
 import com.example.weatherforecast.dto.VillageForecastDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@AutoConfigureWireMock(port = 0)
+@TestSetup
 class VillageForecastInfoClientTest {
     @Autowired
     private VillageForecastInfoClient client;
