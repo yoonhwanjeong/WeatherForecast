@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPath": "/getMidLandFcst",
+    "method": "GET",
+    "queryParameters": {
+      "regId": {
+        "equalTo": "11B00000"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "MidFcstInfoService_getMidLandFcst_body.json"
+  }
+}

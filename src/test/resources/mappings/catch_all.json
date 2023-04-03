@@ -1,0 +1,13 @@
+{
+  "priority": 10,
+  "request": {
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "no_data.json"
+  }
+}

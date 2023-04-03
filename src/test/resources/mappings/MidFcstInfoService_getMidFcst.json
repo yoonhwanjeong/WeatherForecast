@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPath": "/getMidFcst",
+    "method": "GET",
+    "queryParameters": {
+      "stnId": {
+        "equalTo": "105"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "MidFcstInfoService_getMidFcst_body.json"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPath": "/getMidTa",
+    "method": "GET",
+    "queryParameters": {
+      "regId": {
+        "equalTo": "11A00101"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "MidFcstInfoService_getMidTa_body.json"
+  }
+}

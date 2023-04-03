@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPath": "/getMidSeaFcst",
+    "method": "GET",
+    "queryParameters": {
+      "regId": {
+        "equalTo": "12A20000"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "MidFcstInfoService_getMidSeaFcst_body.json"
+  }
+}

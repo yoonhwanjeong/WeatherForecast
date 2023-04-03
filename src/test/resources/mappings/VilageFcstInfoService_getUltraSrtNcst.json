@@ -1,0 +1,21 @@
+{
+  "request": {
+    "urlPath": "/getUltraSrtNcst",
+    "method": "GET",
+    "queryParameters": {
+      "nx": {
+        "equalTo": "60"
+      },
+      "ny": {
+        "equalTo": "127"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "VilageFcstInfoService_getUltraSrtNcst_body.json"
+  }
+}
