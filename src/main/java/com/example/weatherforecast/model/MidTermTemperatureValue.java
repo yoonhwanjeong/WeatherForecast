@@ -1,5 +1,8 @@
 package com.example.weatherforecast.model;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class MidTermTemperatureValue {
     private int taMin3;
     private int taMin3Low;
