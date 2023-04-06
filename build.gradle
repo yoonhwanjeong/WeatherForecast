@@ -29,6 +29,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation "com.querydsl:querydsl-jpa:${querydslVersion}"
     implementation "com.querydsl:querydsl-apt:${querydslVersion}"
+    implementation 'org.apache.commons:commons-csv:1.10.0'
     runtimeOnly 'com.mysql:mysql-connector-j'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
