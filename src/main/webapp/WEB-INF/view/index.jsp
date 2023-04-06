@@ -36,6 +36,25 @@
 </div>
 <div>
     <p>중기 예보</p>
+    <fieldset>
+        <input type="radio" id="mid-term-forecast" name="mid-term-forecast-type" value="forecast" checked>
+        <label for="mid-term-forecast">중기전망</label>
+        <input type="radio" id="mid-term-land-forecast" name="mid-term-forecast-type" value="land">
+        <label for="mid-term-land-forecast">중기육상예보</label>
+        <input type="radio" id="mid-term-temperature" name="mid-term-forecast-type" value="temperature">
+        <label for="mid-term-temperature">중기기온</label>
+        <input type="radio" id="mid-term-sea-forecast" name="mid-term-forecast-type" value="sea">
+        <label for="mid-term-sea-forecast">중기해상예보</label>
+        <br>
+        <select name="mid-term-region" id="mid-term-region-select">
+            <option value="">구역</option>
+            <c:forEach var="midTermRegion" items="${midTermRegions}">
+                <option value="${midTermRegion}">${midTermRegion}</option>
+            </c:forEach>
+        </select>
+        <br>
+        <button type="button" onclick="gotoMidTermForecast()">조회</button>
+    </fieldset>
 </div>
 <script>
     const categoryNames = {
@@ -149,6 +168,31 @@
                         resultElement.innerHTML = '단기 예보 조회에 실패했습니다';
                     }
                 });
+        }
+    }
+
+    document.querySelectorAll('input[name="mid-term-forecast-type"]').forEach(node => {
+        node.onchange = function () {
+            fetch('/api/region/getMidTermRegions?type=' + node.value)
+                .then(response => response.json())
+                .then(regions => {
+                    clearSelect('mid-term-region-select', '구역');
+                    const element = document.getElementById('mid-term-region-select');
+                    for (const region of regions) {
+                        const option = document.createElement('option');
+                        option.value = region;
+                        option.innerHTML = region;
+                        element.appendChild(option);
+                    }
+                });
+        };
+    });
+
+    function gotoMidTermForecast() {
+        const type = document.querySelector('input[name="mid-term-forecast-type"]:checked').value;
+        const region = document.getElementById('mid-term-region-select').value;
+        if (region !== '') {
+            window.location.href = '/midTermForecast?type=' + type + '&region=' + region;
         }
     }
 </script>

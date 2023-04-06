@@ -1,5 +1,7 @@
 package com.example.weatherforecast.controller;
 
+import com.example.weatherforecast.model.MidTermForecastRegion;
+import com.example.weatherforecast.service.MidTermForecastRegionService;
 import com.example.weatherforecast.service.VillageForecastRegionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +14,12 @@ import java.util.List;
 @RequestMapping("/api/region")
 public class RegionApiController {
     private final VillageForecastRegionService villageForecastRegionService;
+    private final MidTermForecastRegionService midTermForecastRegionService;
 
-    public RegionApiController(VillageForecastRegionService villageForecastRegionService) {
+    public RegionApiController(VillageForecastRegionService villageForecastRegionService,
+                               MidTermForecastRegionService midTermForecastRegionService) {
         this.villageForecastRegionService = villageForecastRegionService;
+        this.midTermForecastRegionService = midTermForecastRegionService;
     }
 
     /**
@@ -34,5 +39,14 @@ public class RegionApiController {
     @GetMapping("/getThirdLevels")
     public List<String> getThirdLevels(@RequestParam String firstLevel, @RequestParam String secondLevel) {
         return villageForecastRegionService.getThirdLevels(firstLevel, secondLevel);
+    }
+
+    /**
+     * @param type 중기 예보 타입
+     * @return 중기 예보 조화 가능한 지역 목록
+     */
+    @GetMapping("/getMidTermRegions")
+    public List<String> getMidTermRegions(@RequestParam MidTermForecastRegion.Type type) {
+        return midTermForecastRegionService.getRegions(type);
     }
 }
