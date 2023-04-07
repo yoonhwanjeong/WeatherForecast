@@ -3,6 +3,12 @@
     "urlPath": "/getVilageFcst",
     "method": "GET",
     "queryParameters": {
+      "base_date": {
+        "equalTo": "20230407"
+      },
+      "base_time": {
+        "equalTo": "0800"
+      },
       "nx": {
         "equalTo": "60"
       },

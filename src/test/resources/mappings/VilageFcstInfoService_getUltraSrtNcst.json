@@ -3,6 +3,12 @@
     "urlPath": "/getUltraSrtNcst",
     "method": "GET",
     "queryParameters": {
+      "base_date": {
+        "equalTo": "20230407"
+      },
+      "base_time": {
+        "equalTo": "1000"
+      },
       "nx": {
         "equalTo": "60"
       },

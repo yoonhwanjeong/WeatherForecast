@@ -7,7 +7,7 @@
         "equalTo": "12A20000"
       },
       "tmFc": {
-        "equalTo": "202304070600"
+        "equalTo": "202304071800"
       }
     }
   },
@@ -16,6 +16,6 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "bodyFileName": "MidFcstInfoService_getMidSeaFcst_body.json"
+    "bodyFileName": "MidFcstInfoService_getMidSeaFcst_1800_body.json"
   }
 }

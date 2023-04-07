@@ -1,12 +1,19 @@
 package com.example.weatherforecast.controller;
 
 import com.example.weatherforecast.TestSetup;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+
+import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -21,6 +28,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class VillageForecastApiControllerTest {
     @Autowired
     private MockMvc mockMvc;
+    @MockBean
+    private Clock clock;
+
+    @BeforeEach
+    void setUp() {
+        Clock fixedClock = Clock.fixed(Instant.parse("2023-04-07T02:00:00Z"), ZoneId.of("+9"));
+        given(clock.instant()).willReturn(fixedClock.instant());
+        given(clock.getZone()).willReturn(fixedClock.getZone());
+    }
 
     @Test
     void getUltraShortNowcast() throws Exception {

@@ -5,6 +5,9 @@
     "queryParameters": {
       "stnId": {
         "equalTo": "105"
+      },
+      "tmFc": {
+        "equalTo": "202304070600"
       }
     }
   },

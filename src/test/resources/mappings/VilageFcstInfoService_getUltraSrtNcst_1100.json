@@ -1,13 +1,13 @@
 {
   "request": {
-    "urlPath": "/getUltraSrtFcst",
+    "urlPath": "/getUltraSrtNcst",
     "method": "GET",
     "queryParameters": {
       "base_date": {
         "equalTo": "20230407"
       },
       "base_time": {
-        "equalTo": "1030"
+        "equalTo": "1100"
       },
       "nx": {
         "equalTo": "60"
@@ -22,6 +22,6 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "bodyFileName": "VilageFcstInfoService_getUltraSrtFcst_body.json"
+    "bodyFileName": "VilageFcstInfoService_getUltraSrtNcst_1100_body.json"
   }
 }

@@ -5,6 +5,9 @@
     "queryParameters": {
       "regId": {
         "equalTo": "11A00101"
+      },
+      "tmFc": {
+        "equalTo": "202304070600"
       }
     }
   },
