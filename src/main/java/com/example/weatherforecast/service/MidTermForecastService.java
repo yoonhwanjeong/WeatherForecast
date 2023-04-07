@@ -19,8 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 @Service
@@ -33,19 +33,22 @@ public class MidTermForecastService {
     private final MidTermTemperatureRepository midTermTemperatureRepository;
     private final MidTermForecastRegionRepository midTermForecastRegionRepository;
     private final MidTermForecastInfoClient client;
+    private final Clock clock;
 
     public MidTermForecastService(MidTermForecastRepository midTermForecastRepository,
                                   MidTermLandForecastRepository midTermLandForecastRepository,
                                   MidTermSeaForecastRepository midTermSeaForecastRepository,
                                   MidTermTemperatureRepository midTermTemperatureRepository,
                                   MidTermForecastRegionRepository midTermForecastRegionRepository,
-                                  MidTermForecastInfoClient client) {
+                                  MidTermForecastInfoClient client,
+                                  Clock clock) {
         this.midTermForecastRepository = midTermForecastRepository;
         this.midTermLandForecastRepository = midTermLandForecastRepository;
         this.midTermSeaForecastRepository = midTermSeaForecastRepository;
         this.midTermTemperatureRepository = midTermTemperatureRepository;
         this.midTermForecastRegionRepository = midTermForecastRegionRepository;
         this.client = client;
+        this.clock = clock;
     }
 
     public MidTermForecast getMidTermForecast(String regionName) {
@@ -124,12 +127,12 @@ public class MidTermForecastService {
         return midTermTemperatureRepository.save(temperature);
     }
 
-    public MidTermForecastRegion getRegion(String name, MidTermForecastRegion.Type type) {
+    protected MidTermForecastRegion getRegion(String name, MidTermForecastRegion.Type type) {
         return midTermForecastRegionRepository.findByNameAndType(name, type);
     }
 
-    public String getTime() {
-        LocalDateTime time = LocalDateTime.now(ZoneId.of("+9")).minusHours(6);
+    protected String getTime() {
+        LocalDateTime time = LocalDateTime.now(clock).minusHours(6);
         return String.format("%s%02d00", DATE_FORMATTER.format(time), time.getHour() / 12 * 12 + 6);
     }
 }

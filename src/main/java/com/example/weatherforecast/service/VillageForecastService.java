@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
@@ -22,11 +22,16 @@ public class VillageForecastService {
     private final VillageForecastRepository forecastRepository;
     private final VillageForecastRegionRepository regionRepository;
     private final VillageForecastInfoClient client;
+    private final Clock clock;
 
-    public VillageForecastService(VillageForecastRepository forecastRepository, VillageForecastRegionRepository regionRepository, VillageForecastInfoClient client) {
+    public VillageForecastService(VillageForecastRepository forecastRepository,
+                                  VillageForecastRegionRepository regionRepository,
+                                  VillageForecastInfoClient client,
+                                  Clock clock) {
         this.forecastRepository = forecastRepository;
         this.regionRepository = regionRepository;
         this.client = client;
+        this.clock = clock;
     }
 
     public VillageForecast getOrCreate(VillageForecast.Type type, String firstLevel, String secondLevel, String thirdLevel) {
@@ -43,8 +48,8 @@ public class VillageForecastService {
         return forecastRepository.save(fetchForecast(type, baseDate, baseTime, region));
     }
 
-    public String getBaseDate(VillageForecast.Type type) {
-        LocalDateTime time = LocalDateTime.now(ZoneId.of("+9"));
+    protected String getBaseDate(VillageForecast.Type type) {
+        LocalDateTime time = LocalDateTime.now(clock);
         switch (type) {
             case ULTRA_SHORT_NOWCAST:
                 return DATE_FORMATTER.format(time.minusMinutes(40));
@@ -57,8 +62,8 @@ public class VillageForecastService {
         }
     }
 
-    public String getBaseTime(VillageForecast.Type type) {
-        LocalDateTime time = LocalDateTime.now(ZoneId.of("+9"));
+    protected String getBaseTime(VillageForecast.Type type) {
+        LocalDateTime time = LocalDateTime.now(clock);
         switch (type) {
             case ULTRA_SHORT_NOWCAST:
                 return DateTimeFormatter.ofPattern("HH00").format(time.minusMinutes(40));
@@ -71,7 +76,7 @@ public class VillageForecastService {
         }
     }
 
-    public VillageForecast fetchForecast(VillageForecast.Type type, String baseDate, String baseTime, VillageForecastRegion region) {
+    protected VillageForecast fetchForecast(VillageForecast.Type type, String baseDate, String baseTime, VillageForecastRegion region) {
         VillageForecast forecast = new VillageForecast();
         forecast.setBaseDate(baseDate);
         forecast.setBaseTime(baseTime);
